@@ -1,0 +1,10 @@
+package StudyWeb.repository;
+
+import StudyWeb.domain.JoinStudy;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface JoinListRepository extends JpaRepository<JoinStudy,Long> {
+
+}
