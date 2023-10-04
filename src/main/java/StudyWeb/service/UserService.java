@@ -6,10 +6,12 @@ import StudyWeb.exception.UserNotFoundException;
 import StudyWeb.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
-import javax.validation.constraints.Email;
 import java.util.List;
 
 @Service
@@ -20,6 +22,7 @@ public class UserService {
 
     private final UserRepository userRepository;
 
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     // 회원가입
     public User createUser(final UserDTO userDtO){
@@ -28,6 +31,19 @@ public class UserService {
         user.updateUserInfo(userDtO.getUsername(),userDtO.getPassword());
         return user;
     }
+
+//    @PostMapping("/joinProc")
+//    public String joinProc(User user) {
+//        System.out.println("회원가입 진행 : " + user);
+//        String rawPassword = user.getPassword();
+//        String encPassword = bCryptPasswordEncoder.encode(rawPassword);
+//        user.setPassword(encPassword);
+//        user.setRoles("ROLE_USER");
+//        userRepository.save(user);
+//        return "redirect:/loginForm";
+//    }
+
+
 
 
 
@@ -56,16 +72,16 @@ public class UserService {
        // user.getPosts().clear();
     }
 
-    @Transactional
-    public UserDTO updateUsername(String before, String username) {
-        User user = userRepository.findByUsername(before).orElseThrow(UserNotFoundException::new);
-        user.changeUsername(username);
-        log.info("username was changed {} to {}",before,username);
-        return UserDTO.builder()
-                .username(username)
-                .email(user.getEmail())
-                .build();
-    }
+//    @Transactional
+//    public UserDTO updateUsername(String before, String username) {
+//        User user = userRepository.findByUsername(before).orElseThrow(UserNotFoundException::new);
+//        user.changeUsername(username);
+//        log.info("username was changed {} to {}",before,username);
+//        return UserDTO.builder()
+//                .username(username)
+//                .email(user.getEmail())
+//                .build();
+//    }
 
 
 
