@@ -26,6 +26,8 @@ public class QUser extends EntityPathBase<User> {
 
     public final StringPath category = createString("category");
 
+    public final SimplePath<java.security.Timestamp> createDate = createSimple("createDate", java.security.Timestamp.class);
+
     public final StringPath email = createString("email");
 
     public final StringPath emailAuthKey = createString("emailAuthKey");
@@ -43,6 +45,12 @@ public class QUser extends EntityPathBase<User> {
     public final NumberPath<Long> mileage = createNumber("mileage", Long.class);
 
     public final StringPath password = createString("password");
+
+    public final StringPath provider = createString("provider");
+
+    public final StringPath providerId = createString("providerId");
+
+    public final StringPath roles = createString("roles");
 
     public final ListPath<Timer, QTimer> timers = this.<Timer, QTimer>createList("timers", Timer.class, QTimer.class, PathInits.DIRECT2);
 

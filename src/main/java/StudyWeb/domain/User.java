@@ -1,14 +1,23 @@
 package StudyWeb.domain;
 
+import com.nimbusds.oauth2.sdk.TokenIntrospectionSuccessResponse;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
+import java.security.Timestamp;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-@Getter
-@NoArgsConstructor
+//@Getter
+//@Setter
+//@NoArgsConstructor
+@Builder
+@Data
 @Entity
+@AllArgsConstructor
 public class User {
 
     @Id
@@ -20,6 +29,8 @@ public class User {
     private String email;
 
     private String username;
+
+    private String roles;
 
     private String password;
 
@@ -38,6 +49,8 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Timer> timers = new ArrayList<>();
 
+    private User(){};
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "group_id" )
@@ -52,6 +65,14 @@ public class User {
     @OneToOne(fetch = FetchType.LAZY,mappedBy = "user")
     private JoinStudy joinStudy;
 
+    // OAuth를 위해 구성한 추가 필드 2개(google, googleId)
+    private String provider;
+    private String providerId;
+
+    @CreatedDate
+    private Timestamp createDate;
+
+
     public void updateUserInfo(String username, String password) {
         this.username = username;
         this.password = password;
@@ -62,6 +83,14 @@ public class User {
     }
     public void changePassword(String password) {
         this.password = password;
+    }
+
+    // ENUM으로 안하고 ,로 해서 구분해서 ROLE을 입력 -> 그걸 파싱!!
+    public List<String> getRoleList(){
+        if(this.roles.length() > 0){
+            return Arrays.asList(this.roles.split(","));
+        }
+        return new ArrayList<>();
     }
 
 //    @JsonBackReference
