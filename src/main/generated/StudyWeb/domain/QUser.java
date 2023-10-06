@@ -46,6 +46,8 @@ public class QUser extends EntityPathBase<User> {
 
     public final StringPath password = createString("password");
 
+    public final ListPath<Post, QPost> posts = this.<Post, QPost>createList("posts", Post.class, QPost.class, PathInits.DIRECT2);
+
     public final StringPath provider = createString("provider");
 
     public final StringPath providerId = createString("providerId");

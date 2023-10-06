@@ -12,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Service
@@ -31,22 +33,6 @@ public class UserService {
         user.updateUserInfo(userDtO.getUsername(),userDtO.getPassword());
         return user;
     }
-
-//    @PostMapping("/joinProc")
-//    public String joinProc(User user) {
-//        System.out.println("회원가입 진행 : " + user);
-//        String rawPassword = user.getPassword();
-//        String encPassword = bCryptPasswordEncoder.encode(rawPassword);
-//        user.setPassword(encPassword);
-//        user.setRoles("ROLE_USER");
-//        userRepository.save(user);
-//        return "redirect:/loginForm";
-//    }
-
-
-
-
-
 
 
     //중복 유저 확인

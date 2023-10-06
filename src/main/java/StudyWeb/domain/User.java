@@ -1,5 +1,6 @@
 package StudyWeb.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.nimbusds.oauth2.sdk.TokenIntrospectionSuccessResponse;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -58,6 +59,10 @@ public class User {
 
     @OneToOne(fetch = FetchType.LAZY,mappedBy = "user")
     private Goal goal;
+
+    @JsonBackReference
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<Post> posts = new ArrayList<>();
 
 //    @OneToMany(mappedBy = "user")
 //    private List<Post> posts = new ArrayList<>();
