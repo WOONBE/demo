@@ -1,6 +1,7 @@
-package StudyWeb.dto;
+package StudyWeb.repository;
 
 
+import StudyWeb.dto.CommentResponseDto;
 import StudyWeb.status.GroupStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,10 +21,7 @@ public class PostResponseDto {
     private String title;
     private String content;
     private List<String> url;
-//    private Long hit;
-//    private Integer like;
     private GroupStatus groupStatus;
-    //private QuestionStatus questionStatus;
     private int commentsSize;//get All 게시글 시 사용
     private List<CommentResponseDto> comments;
     private List<String> tags;

@@ -12,13 +12,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-//@Getter
-//@Setter
-//@NoArgsConstructor
+
 @Builder
 @Data
-@Entity
+@Table(name = "users",uniqueConstraints =
+        {@UniqueConstraint(
+                name = "USERNAME_UNIQUE",
+                columnNames = {"username"})
+        })
 @AllArgsConstructor
+@Entity
 public class User {
 
     @Id
@@ -63,6 +66,13 @@ public class User {
     @JsonBackReference
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Post> posts = new ArrayList<>();
+
+    public void addPost(Post post) {
+        this.posts.add(post);
+        if (post.getUser() != this) {
+            post.setUser(this);
+        }
+    }
 
 //    @OneToMany(mappedBy = "user")
 //    private List<Post> posts = new ArrayList<>();

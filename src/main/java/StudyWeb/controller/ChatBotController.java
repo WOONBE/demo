@@ -20,7 +20,7 @@ import java.net.URL;
 import java.util.Date;
 
 @Controller
-public class ChatController {
+public class ChatBotController {
 
     private static String secretKey = "anZaTUdJVUtOV2FqWmtUSkJBQ2NyZ2h2aU9odlRiZGU=";
     private static String apiUrl = "https://clovachatbot.ncloud.com/api/chatbot/messenger/v1/11948/0f5c131d8451dcfe062c4e15f2868c9e21e27e2fabb0b28e7c2b8e9f042d6a8c";
