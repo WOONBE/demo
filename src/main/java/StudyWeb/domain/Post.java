@@ -39,14 +39,10 @@ public class Post extends BaseTime {
     @Column(name = "hit_count")
     private Long hit;
 
-//    @OneToMany(mappedBy = "post",cascade = CascadeType.ALL,orphanRemoval = true)
-//    private List<Like> likes = new ArrayList<>();
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
 
-//    @OneToMany(mappedBy = "post",cascade = CascadeType.ALL,orphanRemoval = true)
-//    private List<Image> images = new ArrayList<>();
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PostTag> postTags = new ArrayList<>();
@@ -62,10 +58,6 @@ public class Post extends BaseTime {
         this.content = updateDto.getContent();
     }
 
-//    public void addImage(Image image) {
-//        this.images.add(image);
-//        image.setPost(this);
-//    }
 
     //<--연관관계 편의 메서드-->//
     public void setUser(User user) {
